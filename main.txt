@@ -1,0 +1,1317 @@
+filter只能对数组使用，不能对单个jQuery对象使用,filter在ie中会报错，但是能正常执行语句
+
+任何元素要append到body上才会有用，任何！
+
+1.丢弃小数部分,保留整数部分
+php: intval(7/2)
+js:parseInt(7/2)
+
+2.向上取整,有小数就整数部分加1
+php: ceil(7/2)
+js: Math.ceil(7/2)
+
+3,四舍五入.
+php: round(7/2)
+js: Math.round(7/2)
+
+4,向下取整
+php: floor(7/2)
+js: Math.floor(7/2)
+
+typeof将返回变量类型的字符串结果！
+
+设置Date的时候一定要从date --> month -->year,或者3个一起设置new Date(1999,02,01)，否则日期可能出错
+
+调用不同函数时，this所指对象是不一样的！
+
+\u4e00-\u9fa5    中文的正则
+
+一定要new了之后才能创建对象，才能在对象上建立属性
+
+动态生成js（web服务器调用生产服务器）会降低效率，放在一个固定的url直接读会快很多
+
+$.getScript()把代码写在回调函数里，可以保证加载完成再执行代码
+
+如果提交按钮有name属性，jquery的submit()就会失效！id="submit"也不行！
+
+加了<br/>仍无变化，可能是设置了height
+
+用jquery的submit方法提交表单，提交按钮的type要是button而不是submit
+
+select需要有值才能有用，不能赋给一个不存在的值，即option所对应的值必须存在
+
+相同id的元素如果被replace掉，要用livequery才能一直绑定
+
+each()用return false来break,return其余任何值都相当于continue
+
+IE6下，select的option用display:none无效
+
+select()应先focus()，保证所有浏览器有效
+
+数字太长可能引起数据不同的问题，可以改用String来解决
+
+仅div且在设置了position后可以通过改变坐标来实现动画效果
+
+<a href="#tab">aaa</a>页面未加载完成就点击的话，url会追加这个href，造成页面混乱
+
+background如果要用一张图片的话，需要设置width和height，否则不会显示出来
+
+web.xml的 / 表示的是http://localhost:8080/ + 工程名 
+而jsp的action 
+加了 /的时候表示绝对路径http://localhost:8080/  
+而没有加 / 表示的是相对路径
+
+$.extend(),最新的写在最后
+
+<select/>会挡在div前面，可以在div后面加一个空的iframe来解决这个问题
+
+div的height如果要设置为全屏幕高，不能用height=100%来设置，只能通过js先获取屏幕高度，再设置,window.screen.height
+
+ie6下面，隐藏div和float同时出现的话可能会有重复的内容跨出div，套一个div或者将隐藏div远离内容div可以解决这个问题
+
+用#来获取元素，只能得到第一个，有时候调试出不来效果的话，可以换成[id='']来看是否出现了相同id的元素
+
+JS里 面的new Date("xxxx/xx/xx")这个日期的构造方法有一个妙处，当你传入的是"xxxx/xx/0"（0号）的话，得到的日期是"xx"月的前一个月的最后一天（"xx"月的最大取值是69，题外话），如果传入"1999/13/0"，会得到"1998/12/31"。而且最大的好处是当你传入"xxxx/3/0"，会得到xxxx年2月的最后一天，它会自动判断当年是否是闰年来返回28或29
+
+new Date(2000,3,1)返回2000年4月1日
+new Date("2000/3/1")返回2000年3月1日
+
+a.click(func):func里面的this就是a
+a.click(function(){
+    func()
+});
+func里面的this是window，如果要指向a，则需要把a传入func()
+或者用bind方法:
+a.bind("click",{param:1},func);
+func(event) {
+    var a = event.data.param;
+}
+
+$("td").click(function(){
+  alert($(this).prevAll("td").length);
+});
+可以获取td在当前tr的位置
+
+自定义的html属性要有值，不然可能不被解析导致取不到：
+<tr rt>:$("tr[rt]")为空
+<tr rt="rt">:$("tr[rt]")不为空
+
+给radio的click绑定一个函数，可以设置attr("checked","checked")来触发事件，这样能够避免触发click事件。
+
+提交表单的时候，?a=b&b=c,=后面一定要有参数，如果是=&在一起，则会导致参数不对无法提交
+
+提交按钮不要使用id="submit" name="submit"
+
+改dwr后，downoad下来http://172.21.127.34:8080/mu/dwr/interface/FrontLoginAction.js，再添加到interface.js里
+
+当脚本设置了某个radio为checked，再在dom树中移动它的位置，或者其祖先元素的位置(即示例中的：$("#dialog").appendTo("body");)，当前radio在ie6下的checked状态被清除了！
+
+object.attrName = object[attrName],用中括号取的时候注意引号
+
+检查数组中的重复元素，可以把所有元素都拼成一个String，然后用indexOf和lastIndexOf方法来判断
+
+用ajax拉一个html进来，radio名字如果和当前出现的radio同名，则会出现丢失当前radio的情况
+
+点后退到上一个页面，固定DOM的input能够找到，但如果是在上一个页面动态添加的input则会丢失
+
+setTimeout,如果在一个时间内多次调用相同函数，只有最后一个函数会被执行
+
+url添加#能修改地址栏并且不刷新页面
+
+ajax调方法，属性名要加引号严格控制
+
+parseInt('12a') = 12, Number('12a') = NaN. parseFloat相同
+
+new Date('2011-03-15')在ie下无法获得正常格式
+new Date('2011/03/15')则没有问题
+
+正则里有用()+的分组，最后match的时候会把分组的内容也算在内，用(?:)在不会
+
+不同域名可以有不同的线程同时读取，所以图片路径换成了95530
+
+scrollIntoView()可以让新添加的元素显示在屏幕范围内
+
+对一个函数使用typeof,在ff里可以返回function,在ie里返回object
+
+<trs_document autolink="false"/>避免自动生成<a>
+
+ie6图片重复加载解决：
+在页头CSS加入如下代码 html { zoom: expression(function(ele){ ele.style.zoom = "1"; document.execCommand("BackgroundImageCache", false, true); }(this)); }
+<!--[if IE 6]><script type="text/javascript"> try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} </script><![endif]-->
+
+这源于著名的IE6双倍外边距BUG，例如，你给一个DIV设计了浮动，并且，设置了margin-left:5px;，在IE6中很可能就是margin-left:10px了，这里，给浮动元素设置 display:inline；，即可解决问题。
+
+非贪婪匹配(加了?)，会查找尽量短的匹配，例如一行文字有3个符合条件的，并且整体也符合条件，贪婪匹配会找到一个结果，非贪婪会找到3个结果
+
+z-index要跟position配合使用，如果无效，要查看父节点的z-index
+
+a($('a'));
+function a(t) {
+    var temp = $(t);
+}
+在a里面需要转换成jquery对象
+
+<a href="###"></a>可以在点击后不用跳回页面顶部,如果有页面刷新可以这样做
+
+jQuery的extend可能会影响config的参数值，用extend的时候注意第一个参数不要加{},每次使用{}，都相当于产生一个新的随机地址
+
+jQuery的attr('readonly','readonly')在FF中可用，在IE中需要先失去焦点一次才有效
+
+replaceWith()可能引起ie6崩溃，可替换为html()
+
+b.html使用ajax拉入a.html，若a.html里有改变dom结构的js语句，则可能引起b.html页面的混乱
+
+document.activeElement用来判断当前页面获得焦点的元素
+
+<a href>不能由click点击触发href后的地址和事件
+
+var iframeBody = $(document.getElementById("favorIFrame").contentWindow.document.body);
+
+eval没有返回值，或者说返回undefined
+
+jquery的ajax若同一action报not found，则可能是action没加参数
+
+html页面中可能存在隐藏字符，导致样式失效等问题
+
+因为浏览器对table的解释是等待整个table全部加载完才显示。如果加入tbody，浏览器则一边下载一边显示已经下载的内容。
+
+当1个table下并列放多个tbody，tbody里又各自需要放table时， 
+        在IE下，可以在tbody后直接写上table
+        而这在FireFox下只支持一个tbody,不支持多个这样的tbody。
+        需要把table先放到<tr><td>...</td></tr>中，再把这<tr><td><table>...</table></td></tr>跟在tbody后面,如第14行、第17行、第18行
+     这样就可以达到在IE和FireFox下，1个table中同时放多个tbody都能用document.getElementById()语句来获得相应的tbody了。
+
+var a = 1;
+var arr = [a];
+console.log('a:' + a + ' arr[0]:' + arr[0]);
+a = 2;
+console.log('a:' + a + ' arr[0]:' + arr[0]);
+arr[0] = 3;
+console.log('a:' + a + ' arr[0]:' + arr[0]);
+a和arr[0]是分开计算的
+var a = {name : 1};
+var arr = [a];
+console.log('a:' + a.name + ' arr[0]:' + arr[0].name);
+a.name = 2;
+console.log('a:' + a.name + ' arr[0]:' + arr[0].name);
+arr[0].name = 3;
+console.log('a:' + a.name + ' arr[0]:' + arr[0].name);
+a和arr[0]都是指向同一个数据的地址
+
+点击事件，进到函数后，第一个参数是点击的obj？
+
+live的hover用法
+$("table tr").live({
+	   mouseenter:
+	   function()
+	   {
+	      //todo
+	   },
+	   mouseleave:
+	   function()
+	   {
+	      //todo
+	   }
+	});
+
+$('#id').live('hover', function(event){
+	    if (event.type =='mouseover'){
+	        //do something on mouseover
+	        return false;// 禁止冒泡
+	    }else {
+	        // do something on mouseout
+	        return false;
+	    }
+	});
+
+closest,parent等来绑定live和livequery会失效
+
+jquery的ajax请求默认请求cache是true 也就是开启的，dataType为script和jsonp时默认为false。现在我要在浏览器里读取缓存，因为ajax请求的数据很大，请求一次就够了。但是问题来了，在FF里面，是没有ajax缓存的，也就是每次都会触发ajax请求，这点和IE不一样。所以在这里就得注意，做个判断，阻止触发 ajax事件。
+
+1.使用最新版本的jQuery
+2.使用缓存中的jQuery文件
+  引用jQuery的时候，路径可以使用Google的copy，这样访问者的浏览器就会认为该文件未发生改变，读取缓存中的，从而提高加载速度
+3.注意引用备份的jQuery文件
+  如果路径为外部链接的话，注意写一个本地路径的备份文件
+4.使用链式写法
+  对同一个jQuery对象进行操作的话，可以使用链式写法而非分开的多行语句，这样能够提高代码性能
+5.将jQuery找到的dom对象存储在变量中
+  如果要多次调用同一个dom对象，则可以先将搜索到的该dom对象放在一个变量里，以后调用只需要调用该变量即可，不用每次都去dom树中搜索
+6.不能使用简单的方法将jQuery对象转化为原始js的dom对象
+7.考虑到一下几点：
+  性能，文件大小，跨浏览器支持，手机浏览器
+8.有时用简单的css比使用jQuery来操纵css效果好
+9.在使用jQuery时考虑服务器端的任务
+  特别是ajax，确保即使js被禁止也能保证服务器端的任务能够完成
+
+chrome不允许本地的ajax请求，只能在服务器端进行请求,所以，如果要允许本地请求，则：
+给chrome加上启动参数:--allow-file-access-from-files
+就可以了(需要关闭所有chrome窗口重启浏览器)。
+
+disabled属性只对表单类元素有效
+
+
+IE8input无法获取焦点
+1.input设置背景为 none或透明
+2.下层非透明
+3.input没有value
+现象是：直接点input无法得到焦点（很小心的点input的边缘居然可以得到焦点）
+解决办法：
+1.input不设背景透明
+2.input有初始值
+
+\r\n\r\n用来判断空行
+
+抹去文字，可以先将文字设置为背景色，再用js将文字清空，避免页面的闪动效果
+
+ie中checkbox 的onchange
+
+    在ie9以前的版本中使用checkbox的onchange时会出现不能马上执行所绑定的方法，原因是只有当checkbox失去焦点时（lose the fucus/onblur）时才会触发所绑定的方法。
+
+给select动态添加了option，使用setTimeout来给这个select添加刚增加的option的属性，特别是在ie里
+
+jquery的live，用在ie6的动态生成option中可能有失效的问题，建议在select上处理
+
+使用jQuery来寻找层数较多的对象，在同一个括号内用层数来找，可能发生奇怪的问题，可以使用.find来替代
+
+typeof NaN === 'number'是true
+
+Number()的强制类型转换与parseInt()和parseFloat()方法的处理方式相似，只是它转换的是整个值，而不是部分值。parseInt()和parseFloat()方法只转换第一个无效字符之前的字符串。如“3.4.5”被转换成“3.4”，用Number()进行强制类型转换将返回NAN,如果字符串值能被完整地转换，Number()将判断是调用parseInt()还是parseFloat()。
+parseInt('0900') = 0
+Number('0900') = 900
+
+css的position fixed和js的String.replace有很大关系，过长的滚动条滚动后要显示一个fixed的dom，可以考虑setTimeout延时，clearTimeout会清除最后一次setTimeout执行的动作
+
+1.var a;
+alert(a);
+2.a
+alert(a);
+前者打出undefined
+后台执行报错
+
+~!*()_-'.只有这些在cookie中不会被转义
+
+图片可以被转成编码
+
+jQuery的txt()会原样输出里面的内容，如果内容是<img .../>，则页面上也是html代码，不会是图片
+
+静态和闭包:
+var creator = (function() {
+    var s = 10;
+    function ctor() {
+        var a = 1;
+        this.getA = function() {
+            return a++;
+        };
+        this.getS = function() {
+            return s++;  
+        };
+    }
+    return ctor;
+})();
+var a = new creator();
+console.log(a.getA() + ';' + a.getS());
+var b = new creator();
+console.log(b.getA() + ';' + b.getS());
+var c = new creator();
+console.log(c.getA() + ';' + c.getS());
+
+
+
+hasOwnProperty 方法
+返回一个布尔值，指出一个对象是否具有指定名称的属性。 
+
+object.hasOwnProperty(proName)
+
+__proto__这个属性只有在firefox或者chrome浏览器中才是公开容许接见的，是以，其他基于IE内核的浏览器是不会返回true的
+
+非空字符串indexOf空字符串，等于0
+
+比较日期注意不要用new Date()直接比，因为会把时分秒也加入计算的
+
+ 如果同时设置了cache-control和expires，cache-control会覆盖expires。
+
+<img>可以设置onerror，在图片读取出错的时候显示默认图片
+
+给某个dom绑定keyup，document也绑定keyup，如果dom的keyup中return false，则事件冒泡不会被传递给document
+如果想要传递，则只能写return;
+FF下如此，IE未测试
+
+.attr('name', undefined) = .attr('name')
+
+注意ajax会因为url相同而产生取缓存导致数据错误的问题，添加随机参数即可
+
+---------------------------------------------------------------------------
+用JS为一些button按钮注册onclick事件，button按钮数量不定，我采用FOR循环加入div的innerHTML，然后再用FOR循环为这些按钮注册事件，具体代码如下，只有建立button按钮和注册事件的代码：
+   var str="";
+   for(i=0;i<10;i++){
+     str=str+"<input type='button' id='butt"+i+"'/>";
+     }
+   document.getElementById("div").innerHTML=str;
+   
+   //为按钮注册事件,也试过attachEvent()这个方法，貌似也不行
+   for(i=0;i<10;i++){
+      document.getElementById("butt"+i).onclick=function(){goodBye(i)};
+   }
+
+代码大概是这些，现在问题是，按钮能出来，事件也有，但是我alert了下goodBye()这个函数，发现所有按钮传的参数都是10，也就是参数i是10，根据我的构想应该是，id为butt0这个按钮传的参数应该是0，因为给butt0这个按钮注册事件的时候i=0啊，但是所有按钮的参数都是10，难道是参数是循环完了最后1起传？那全部是10也不奇怪哦，现在就是不知道问题在哪？能有高手指导下么？
+=============================================================================
+楼主在另外注册事件时，函数调用的i是for循环中的变量i本身，并是不i的值，比如goodBye是执行alert的话，也就是说你的事件是把i变量的值alert出来。而当你真正触发事件时，你的i是多少就会alert多少（经过循环后i=10）；自然就不是楼主的本意了，你想在循环中把当前的i值作为事件中的函数的参数的话，(理论上是需要把i作为事件的参数传入，然后在事件的函数体内做调用才行)，可是事件本身是不传参的，所以没办法。
+
+变量作用域问题,LZ需要创建闭包在响应函数中,下面是我写的attachEvent和onclick添加事件的方法,LZ可以参考一下自己写出新的,就不直接解决了.
+<html>  
+<head>  
+</head>   
+<body>
+ <div>1</div>
+ <div>2</div>
+ <div>3</div>
+</body>  
+<script type="text/javascript">
+function a(){
+ var d=document.getElementsByTagName("DIV");
+ for(var i=0;i<d.length;i++){
+  //d[i].attachEvent("onclick",function(i){return function(){alert(i);};}(i));
+  d[i].onclick=function(i){return function(){alert(i)};}(i);
+  }
+}
+a();
+</script>  
+</html>
+
+注册事件和调用事件时的参数不一样，要注意区别
+
+---------------------------------------------------------------------------
+
+js中，只有函数对象才有prototype属性
+为了让子类继承父类的方法，需要将子类的prototype指向父类的一个实例对象，这样如果在当前子类的prototype中无法找到的方法，会往上一层，在父类中寻找
+Subclass.prototype = new Class();
+Subclass.prototype.construtor = Subclass;
+子类的构造函数需要先调用父类的构造函数
+function Subclass(a, b) {
+	Class.call(this, a);
+	this.b = b;
+}
+
+实例化对象的lazy loading:
+Class.getInstance().method()
+而不是Class.method();
+getInstance()用来创建实例，并判断是否已经有实例了
+单例模式常用
+
+window.opener.document在ie6下为空，可以先判断opener是否存在
+if (window.opener && !window.opener.closed)
+
+------------------------------------------------------------------------
+var buttons = [];
+if(buttons){ // This is always true
+    // Do something
+}
+
+if(buttons.length){ // True only if buttons contains elements
+    // Do something
+}
+
+-----------------------------------------------------------------------------
+父子iframe跨域传数据，可以让子框架跳转到父框架域名的一个空白页，再做其他的事
+---------------------------------------------------------------------------------
+JS对已经赋值过的变量再次定义无效
+-------------------------------------------------------------------------
+var a = 1;
+alert('a:' + (a in window) + ',' + window.a);
+alert('b:' + (b in window) + ',' + window.b);
+var b = 's';
+--------------------------------------------------------------
+js的声明提前，即var总是先执行，接着才是赋值：
+function() {
+	alert(a);
+	var a = 1;
+}
+相当于：
+function() {
+	var a;
+	alert(a);
+	a = 1;
+}
+
+submit的参数里，有空格的，两个&&写一起的，在不同的浏览器下会有影响
+----------------------------------------------------------------------
+js下，String类型的是没有trim()方法的，在ie下会报错，但在ff下不会，能够继续往下走
+-------------------------------------------------------------------------
+百度搜索:
+<form action="http://www.baidu.com/baidu">
+<input name="word" size="30" maxlength="100" /><!-- 关键词--> 
+<input type="submit" value="百度搜索" onclick="g(form1);" /><Br /> 
+<input name="tn" type="hidden" value="baidulocal" /><!--表示百度站内搜索，返回结果干净，无广告  --> 
+<input name="cl" type="hidden"  value="3" /><!-- 搜索类型，3表示网页搜索，2表示图片或者新闻搜索--> 
+<input name="ct" type="hidden" /><!--ct 值为0 表示互联网中搜索，2097152表示在限定域名搜索 --> 
+</form>
+<input name ="si" type="hidden" value="www.neotrident.com" /><!--在限定的域名中搜索，结合ct一起使用 -->
+
+href的hash属性可以用来设置url里#后面的字符，这个值可以在地址栏中被重写而不刷新页面
+相当有用处的一个东西
+
+对引起submit的元素click，会触发点击回车的事件，再次submit
+
+ie下，https只能引用https的组件，不能用http的
+
+session过期很可能是因为域名不同导致cookie里的sessionId失效引起的
+
+try catch是另一种形式的if
+
+-----------------------------------------------------------------------------
+localStorage. length:返回现在已经存储的变量数目。
+localStorage. key(n):返回第n个变量的键值(key)。
+localStorage.getItem(k):和localStorage.k一样，取得键值为k的变量的值。
+localStorage.setItem(k , v):和localStorage.k = v一样，设置键值k的变量值。
+localStorage.removeItem(k):删除键值为k的变量。
+localStorage.clear():清空所有变量。
+不支持跨域
+需要考虑数据更新的问题
+1.sessionStorage是一个跟浏览器生命周期相同的本地存储,在页面刷新后保持之前输入的数据的场景下特别有效.
+2.可以用localStorage.clear()方法彻底清除localStorage.
+3.localStorage对于每个域都有5兆的存储空间,而且对于存储数据条数也有不同的限制.
+4.localStorage只能存储文本数据.如果你想存储图像,那也不是不可能的,可以用canvas将图片转换成dataurl的形式,然后存储起来.
+5.请关注localStorage的存储性能,在某些浏览器中存取数据非常慢,例如opera中.
+
+-----------------------------------------------------------------------
+ie下document.referrer失效
+
+------------------------------------------------------
+如果没有var a,那么直接if(a)来判断a是否存在是会报undefined的错误的
+----------------------------------------------------------------------
+document.compatMode用来判断当前浏览器采用的渲染方式。
+
+官方解释：
+
+BackCompat：标准兼容模式关闭。
+CSS1Compat：标准兼容模式开启。
+
+当document.compatMode等于BackCompat时，浏览器客户区宽度是document.body.clientWidth；
+当document.compatMode等于CSS1Compat时，浏览器客户区宽度是document.documentElement.clientWidth。
+
+---------------------------------------------------------------------------------------
+
+delete删除了值，但是原位置会保留为undefined，而不是删除这个位置
+[1,2,3]
+delete了3之后
+数组变成了[1,2,undefined]而不是[1,2]
+
+--------------------------------------------------------------------------------------
+浏览器在遇到<body>标签之前，不会渲染页面的任何部分
+Internet Explorer 8, Firefox 3.5, Safari 4, 和Chrome 2 允许并行下载JavaScript 文件
+访问在作用域链中最末端的变量，性能开销最大，将远端变量存储为局部变量，可以优化
+with,try catch会改变作用域最前端的变量，catch中可以写一个专门处理ex的函数调用
+浏览器对直接变量、局部变量的访问速度一般快于对数组变量和对象变量的访问
+
+hasOwnProperty只检测实例成员，in不只如此还能检测原形对象里的成员（即从原型链中出现的属性）
+
+访问dom的集合要比访问数组慢得多
+var divs = document.getElementsByTagName('div');
+for (var i = 0; i < divs.length; i++) {
+	document.body.appendChild(document.createElement('div'))
+}
+将成为死循环，因为divs.length每次都被刷新
+
+nextSibling比childNode快很多（ie中，其余浏览器差不多）
+文字等其他类型在dom中也算一个节点，children比childNodes快因为它只访问元素节点而不包括非元素节点
+
+因为事件的冒泡机制，给body绑一个click事件比给各个子节点绑click事件的效率要好得多，有意思
+
+for-in性能最低
+
+for (var i=0, len=items.length; i < len; i++){
+	process(items[i]);
+}
+定义len是个好习惯
+
+用i--来写循环条件，是利用js弱数据类型（0，undefined会被转为false）来判断循环条件是否成立
+
+if-else 中的条件体应当总是按照从最大概率到最小概率的顺序排列，以保证理论运行速度最快。
+
++new Date(),date对象前的+可以将该date对象转化为数值
+
+Firefox3.5，Chrome 3，和Safari 4，工人线程~Worker
+Safari 4 和Chrome 3 中，页面和工人线程之间只允许传递字符串
+
+split()是最快的字符串操作之一，通常可以在数毫秒内处理具有超过10'000 个元素的“分隔符分割”列表。
+
+通过避免使用eval()和Function()构造器避免二次评估。此外，给setTimeout()和setInterval()传递函数参数而不是字符串参数。
+
+使用数组、对象直接量的速度更快
+
+常规交互原则：操作可撤销，状态可恢复。
+
+[^CN]匹配不等于C或者N的，不是不匹配CN，可以用(?!CN)来实现这种作用
+
+
+----------------------------------------------------------------------------------------
+搞懂这段代码，就明白闭包和this了：
+function test() {
+    this.name = 'test name';
+    
+    this.show1 = function() {
+        alert(this.name + ' in show1');
+    };
+    
+    this.show2 = function() {
+        function cc(){
+            alert(this.name + ' in show2');
+        }
+        cc();
+    };
+    this.show3 = function() {
+        function cc(){
+            alert(this.name + ' in show3');
+        }
+        cc.call(this);
+    };
+    
+    this.show4 = function() {
+        //name = this.name;
+        setTimeout(function() {
+            alert(this.name + ' in show4');
+        }, 1000);
+    };
+    
+    this.show5 = function() {
+        var name = this.name;
+        setTimeout(function() {
+            alert(this.name + ' in show5');
+        }, 2000);
+    };
+    
+    this.show6 = function() {
+        name = this.name;
+        setTimeout(function() {
+            alert(this.name + ' in show6');
+        }, 2000);
+    };
+}
+var t = new test();
+t.show1();
+t.show2();
+t.show3();
+t.show4();
+t.show5();
+//t.show6();
+1.作为纯粹函数调用，this指window
+2.作为方法调用，this指调用该方法的对象
+3.作为构造函数调用，this指该对象
+4.作为apply和call调用，指第一个传进去的参数，没有的话就指window
+-------------------------------------------------------------------------------
+
+前端框架的分析：
+
+    选择器，domReady, ajax是现代框架的标配。
+    动画引擎，除非你的框架像Prototype.js那样拥有像script.aculo.us这样顶级的动画框架做后盾，最好也加上。
+    DOM操作是重中之重，节点的遍历，样式操作，属性操作也属于它的范畴，是否细分看你框架的规模。由于完全模块化了， mass Framework基至可以将旧式IE的兼容代码独立出去。
+    现在主流的事件系统都支持事件代理了。
+    对基本数据类型的操作是必须的，像jQuery还是不得不提供trim, camelCase, each, map等方法。 像Prototype.js等侵入式框架则可以肆无忌惮地在原型上添加camelize等好用方法。
+    类型的判定必不可少，常见形式是isXXX系列。
+    brower sniff已死， feature detect当立。
+    异步列队等处理回调的方案的流行
+    即使不专门提供一个类工厂，也应该存在一个叫extend或mixin的方法对对象进行扩展。 jQuery虽然没有类工厂，但在jQuery ui中也不得不整一个，可见其重要性。
+    自从jQuery搞鼓出一个叫noConflict的方法，新兴的小库们都带此方法，以求狭缝中生存。
+    许多框架是非常重视cookie的操作。
+---------------------------------------------------------------------
+toString.call(obj)能返回[object Array]等不同类型的字符串
+但是obj.toString()就不行，而是打印出obj的具体内容
+以此来判断数据的类型
+在ie的控制台中，toString.call(1)报错，ff中正常
+但Object.prototype.toString.call(1)却正常
+typeof null返回的是'object'
+-------------------------------------------------------------
+jQuery.fn.init.prototype = jQuery.fn = jQuery.prototype
+
+Function定义的时候，里面如果要用到变量，总是拿到全局变量
+var a = 1;
+(function() {
+	var a = 2;
+	var c = new Function("alert(a);");//这里会打印出1而非2
+	c();
+})();
+
+Number空字符串得到0（FF下）
+
+$.map是利用了apply，将第二层数组里的各个元素传入来将二维数组里的元素平滑掉的，使最后的结果只是一维数组
+
+函数中的arguments是一个对象而非一个数组
+
+对于一些操作dom的js，在执行前，一定要看dom是否已存在
+
+-----------------------------------------------------------------------------------------------------------------
+jquery中ajax调用jsonp是需要动态后台支持的，因为会动态把默认的callback这个参数指定的回调函数名把数据包起来再传回给前台
+不过可以在json.json写好回调函数并且把数据包起来，这样前端js不用定义一个回调函数
+就会把success里的函数当成在jsonCallback里指定的函数名来处理数据了
+
+$.ajax({
+	url : 'http://127.0.0.1:8080/json.json',
+	dataType : 'jsonp',
+	jsonp : 'callback',
+	jsonpCallback : 't',
+	success : function(result) {
+		console.log(result.z);
+		//console.log(result);
+	}
+});
+
+json.json:
+t({"z":1})
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+对于选择器：$(“div p:first”)只会返回["#p1"]
+
+而$(“div p:first-child”)则返回["#p1", "#p3"]
+
+-------------------------------------------------------------------------
+使用native的js方法比自定义的方法要快，所以尽量先检查是否有native方法，没有的话再使用自定义的方法
+
+数据的准备和数据的处理尽量分开，减少耦合
+
+-----------------------------------------------------------------------------
+function Test() {}
+Test.name;
+在ff里会显示出Test，在ie里显示出undefined
+
+call调用的函数，就是把函数里的this，换成了参数里指定的对象
+function Class1() {
+	this.name = 'class 1';
+}
+function Class2() {
+	this.show = function() {
+		alert(this.name);
+	};
+}
+var class2 = new Class2();
+alert(class2.name);//undefined
+Class1.call(class2);
+alert(class2.name);//class 1
+
+call和apply的第一个参数，如果是null，就传window代替
+
+编写可重复利用的代码，而不是重复编写代码
+
+1.数据的获取
+2.数据的处理
+3.页面的改变
+
+alert一个对象，会自动调用toString方法
+
+var a = b = 0;
+此时b是全局变量，a是局部变量
+
+隐式全局变量和明确定义的全局变量间有些小的差异，就是通过delete操作符让变量未定义的能力。
+通过var创建的全局变量（任何函数之外的程序中创建）是不能被删除的。
+无var创建的隐式全局变量（无视是否在函数中创建）是能被删除的。
+
+var f = array.length > 0 ? true : false;
+可以简写为
+var f = !!array.length;
+
+
+===========================================================================================
+  var f = function foo(){
+    return typeof foo; // foo是在内部作用域内有效
+  };
+  // foo在外部用于是不可见的
+  typeof foo; // "undefined"
+  f(); // "function"
+
+
+属性在查找的时候是先查找自身的属性，如果没有再查找原型，再没有，再往上走，一直查到Object的原型上，所以在某种层面上说，用 for in语句遍历属性的时候，效率也是个问题。
+
+
+(function baz() {}); // 函数表达式
+console.log(baz); // 引用错误，baz没有被定义
+
+-------------------------------------------------------------
+
+alert(x); // function
+ 
+var x = 10;
+alert(x); // 10
+ 
+x = 20;
+ 
+function x() {};
+ 
+alert(x); // 20
+
+这段代码，不同浏览器，结果不同
+-------------------------------------------------------------
+js的变量不能被delete掉，但是用eval声明的变量，却可以被delete掉
+eval('var a = 10;');
+window.a = 10;
+delete window.a;//a = undefined
+
+-----------------------------------------------------------------
+同一个正则对象，如果用了^$来限制全文，就不要用g了，否则连续用这个正则对象会因为匹配的字符串索引改变而导致判断失败
+
+---------------------------------------------------------------------
+var s = a.replace(exp, function(word) {
+	return word + ' ';
+});
+replace的第二个参数可以传入一个函数
+函数参数是每一个匹配了的字符串
+对这些匹配了的字符串进行循环处理
+return给原来的字符串
+
+
+在JavaScript中不要使用跟HTML的id一样的变量名。如下代码：
+
+<input type=”button” id=”TheButton”>
+
+    TheButton = get("TheButton");
+
+IE会报对象未定义的错误。
+
+
+----------------------------------------------------------------
+
+删除数组中的元素可以使用splice函数
+
+-------------------------------------------------------------------
+js中强制实现接口的一个方法：
+function Work() {
+	
+}
+
+Work.prototype.work = function() {
+    throw new Error('not overloaded');
+};
+
+function Son() {
+	Work.apply(this);
+}
+
+Son.prototype = new Work();
+
+Son.prototype.work = function() {
+	console.log('work is overloaded');
+};
+--------------------------------------------------------------------
+创建对象，如果不用new，那么就会在window或call和apply指定的对象上创建：
+var Son = function() {
+    this.xxx = 'a';
+}
+Son();
+window.xxx;//打印出a
+
+-------------------------------------------------------------------
+var Top = function() {
+    //this.say = function() {
+   //     console.log('say in Top constructor');
+   // }
+};
+Top.prototype.say = function() {
+    console.log('say in outside');
+};
+var a = new Top();
+a.say();
+****属性相同，会先查找自身里的属性，找不到后再去prototype中找****
+对象有__proto__属性，指向创建对象的构造函数的prototype：
+obj.__proto__ == Object.prototype
+new 运算符做了那些事情:
+var obj = new Object();
+1.var obj={}; 也就是说，初始化一个对象obj。
+2.obj.__proto__=Obj.prototype;
+3.Obj.call(obj);也就是说构造obj，也可以称之为初始化obj。
+-------------------------------------------------------------------
+用Top.apply(this)和Sub.prototype = new Top()来实现继承，过程是不一样的
+ptototype会让子类对象的constructor指向父类，apply则不会
+而apply的话，还要注意子类构造函数中，其他语句的顺序
+Top.apply(this)只会执行父类的构造函数一次，并不会继承父类prototype中的东西
+如果属性只是写在父类的构造函数里，那么apply就够了
+
+----------------------------------------------------------------------------
+// 全局变量 "x"
+var x = 10;
+ 
+// 全局function
+function foo() {
+  console.log(x);
+}
+ 
+(function (funArg) {
+ 
+  // 局部变量 "x"
+  var x = 20;
+ 
+  // 这不会有歧义
+  // 因为我们使用"foo"函数的[[Scope]]里保存的全局变量"x",
+  // 并不是caller作用域的"x"
+ 
+  funArg(); // 10, 而不是20
+ 
+})(foo); // 将foo作为一个"funarg"传递下去
+
+
+---------------------------------------------------------------------------------------
+几个函数可能含有相同的父级作用域（这是一个很普遍的情况，例如有好几个内部或者全局的函数）。
+在这种情况下，在[[Scope]]中存在的变量是会共享的。
+一个闭包中变量的变化，也会影响另一个闭包的。
+在某个循环中创建多个函数时，如果在创建的函数中使用循环变量(如”k”)，
+那么所有的函数都使用同样的循环变量，导致一些程序员经常会得不到预期值。
+现在清楚为什么会产生如此问题了——因为所有函数共享同一个[[Scope]]，其中循环变量为最后一次复赋值。
+---------------------------------------------------------------------------------------
+document.domain决定域的优先级高于url里的域
+---------------------------------------------------------------------------------------
+在ie中，如果在页面定义了一个json数据，有名为class的属性名并且没有加引号，那么会报未找到标示符的错误
+
+---------------------------------------------------------------------------------------
+在html中，可以document.createElement('object');
+这个object的data属性可以放置一些元素，例如js、图片的url
+再append到body上去
+从而达到下载了但不执行的目的
+var cache = document.createElement('object');
+cache.data = script_filename;
+cache.id = "coolshell_script_cache_id";
+cache.width = 0;
+cache.height = 0;
+document.body.appendChild(cache);
+
+---------------------------------------------------------------------------------------
+display:none会触发reflow
+而visibility:hidden只会触发repaint，因为没有发现位置变化
+------------------------------------------------------------------------------------
+原始值是存储在栈中的简单数据段，也就是说，他们的值直接存储在变量访问的位置。
+堆是存放数据的基于散列算法的数据结构，在javascript中，引用值是存放在堆中的。
+引用值是存储在堆中的对象，也就是说，存储在变量处的值(即指向对象的变量，存储在栈中）是一个指针，指向存储在堆中的实际对象. 
+例：var obj = new Object(); obj存储在栈中它指向于new Object()这个对象，而new Object()是存放在堆中的。 
+
+-----------------------------------------------------------------------------------------
+利用ajax调用后台来传输一个html内容
+如果这个html没有指定utf-8
+在ie中是不会自动检测的
+可能会返回乱码造成程序出错
+
+--------------------------------------------------------------------------------------------------------
+在html中，正则var reg = /\$/代表一个$
+但是在jsp中，必须要写成\\$才行
+
+
+=====================================================================================
+表单中enctype="multipart/form-data"的意思，是设置表单的MIME编码。默认情况，这个编码格式是application/x-www-form-urlencoded，不能用于文件上传；只有使用了multipart/form-data，才能完整的传递文件数据，进行下面的操作.
+
+
+
+
+=========================================================================
+
+
+ajax传递的参数中有中文，如果是get，则会当成放在url里传递，会乱码
+应该设置type为post
+
+
+====================================================
+
+function Super() {}
+function Temp() {}
+function Sub() {}
+Temp.prototype = Super.prototype;
+Sub.prototype = new Temp();
+这样创建的继承
+即使修改了子类的方法
+不会影响到父类或者别的同级的子类
+
+==================================================
+
+indexOf在IE下对数组不支持
+
+
+====================================================
+html5中，history有pushState和replaceState方法
+可以改变url但是不刷新页面
+
+
+===================================================
+var a = '1';
+typeof a;//'string'
+typeof +a;//'number'
+
+
+==========================================
+在for循环中
+遇到break，直接返回undefined
+遇到return，返回紧跟return的东西
+
+=========================================
+判断是否是对象：
+toString.call(a);//'[object Object]'
+a === Object(a);//true
+
+=====================================
+hasOwnProperty无法检查该对象的原型链中是否具有该属性；该属性必须是对象本身的一个成员
+
+for in在各个浏览器中，输出的属性顺序不同
+对象的有些属性以相同的方式标记成了只读的，永久的（不可删除的）或者不可列举的，这些属性使用for/in循环不能枚举出来（例如prototype中的）。
+虽然所有的用户定义的属性都可以枚举，但是许多内部属性，包括所有的内部方法都是不可枚举的。
+另外对象可以继承其他对象的属性，那些已继承的用户定义的属性可以使用for/in 循环枚举出来
+但如果自己重新定义了原生属性，有些浏览器会输出，有些浏览器则不会
+如果定义了新的属性（在prototype上定义的），则所有浏览器都会输出
+典型地，预定义的属性不是可列举的，而用户定义的属性总是可列举的。
+
+===============================================
+中文版chrome字体bug
+最小的是12px字体
+解决办法：-webkit-text-size-adjust:none;
+
+================================================
+s(1);
+function s(a) {
+    console.log(a);
+}
+声明式的函数调用顺序跟定义顺序
+不会影响在函数调用时
+是否出现未定义的错误
+上面这段代码能正常执行
+
+==================================================
+setTimeout的真正含义：
+1.在指定的延时到了之后，将要执行的函数插入到浏览器线程中
+2.要执行的函数，必须是在创建setTimeout的函数执行完成后，才可能得到执行
+
+
+============================================================
+IE只有在页面不是嵌入frame中的情况下才和Firefox等一样，先执行$(document).ready()的内容，再执行原来的onload方法。
+对于嵌入frame中的页面，也只是绑定在load事件上执行，所以自然是在原来的onload绑定的方法执行之后才轮到。
+
+============================================================
+String(a)相比a.toString()
+如果a是null或undefined
+前一种不会报错
+而后一种会报错
+
+
+=======================================================
+鼠标移动到软键盘的li上后
+可以设置hover为{position: relative;left: 1px;top: 1px;}
+来实现一个动态效果
+
+======================================================
+函数声明后面不能直接加圆括号
+函数表达式可以
+==============================================
+(a.func = a.func)();
+a.func里的this被改变了
+赋值表达式的返回值是等号最右边的值
+=========================================
+setTimeout里的代码总是执行在全局作用域里
+
+==================================================
+在全局作用域下
+var a = 1;
+相当于window.a = 1;
+但是无法delete window.a;
+如果window.a = 1;
+则可以delete window.a;
+
+====================================================================
+getImageData() 方法返回 ImageData 对象，该对象拷贝了画布指定矩形的像素数据。
+
+对于 ImageData 对象中的每个像素，都存在着四方面的信息，即 RGBA 值：
+
+    R - 红色 (0-255)
+    G - 绿色 (0-255)
+    B - 蓝色 (0-255)
+    A - alpha 通道 (0-255; 0 是透明的，255 是完全可见的)
+
+color/alpha 以数组形式存在，并存储于 ImageData 对象的 data 属性中。
+
+=========================================================================
+对一个数组arr来说，在ff中发现
+for (var i = 0; i < arr.length; i++)
+这里的i是数值型
+for (var i in arr)
+这里的i是字符串型
+
+
+===========================================================================
+addEventListener和attachEvent的区别
+1.addEventListener支持的浏览器：ie9，其余4个；attachEvent支持：ie8及之前，opera
+2.addEventListener的事件名不加前缀on，attachEvent要加on
+3.addEventListener的事件处理函数里，this是指绑定事件的元素，而attachEvent中，this永远指向window
+4.addEventListener按照添加的事件处理函数顺序来执行，而attachEvent按照添加的相反顺序来执行
+5.addEventListener第三个参数如果为true，则在捕获过程中处理，一般设置为false
+
+===========================================================================
+Image对象设置了src属性就开始下载图片，不用append到文档中
+script设置了src并且append到body后才开始下载
+ie9及其他浏览器支持script的load事件
+ie8及以前的ie版本不支持script的load事件
+
+===========================================================================
+定义对象属性的时候
+如果前面加var
+会报错，ff下是missing ;
+
+===========================================================================
+通过opacity设置为不可见的
+不能通过show可见
+只能重新设置opacity为可见
+
+=========================================================
+function a() {
+	this.name = '123';
+	return b;
+}
+var t = new a();
+如果b是基础类型，则t会被设置为对象
+并拥有name属性
+如果b是引用类型，则t就是b
+======================================================================
+事件代理能够减少绑定的元素
+以及内存中的处理函数
+并且对于动态添加的子元素也能起效
+当从文档中删除元素的时候
+先将绑定在该元素的事件移除是个好习惯
+可以减少内存中不再使用的事件处理程序
+jq的remove已经做了这个步骤
+=====================================================================
+CORS 打破同源策略的限制，赋予了前端代码访问可信的远程服务的权限。主流的浏览
+器都很好地支持这个规范，除非使用IE6，基本上可以很好地使用它。
+支持CORS 的浏览器：
+IE y >= 8（需要安装 caveat）。
+y Firefox >= 3。
+y Safari: 完全支持。
+y Chrome: 完全支持。
+y Opera: 不支持。
+CORS 的使用非常简单。如果想将你的服务器添加为受信任的数据源，只需在HTTP 协
+议的响应头里加几行：
+Access-Control-Allow-Origin: example.com
+Access-Control-Request-Method: GET,POST
+这两个头字段会对来自example.com 的跨域GET 和POST 请求做验证。多个值之间
+用逗号分隔，就像上面提到的GET、POST 值一样。如果要添加多个域名，将域名列在
+Access-Control-Allow-Origin 头字段之中，每两个域名之间用逗号分隔。如果允许来
+自任意域的访问请求，则需要在源中加入通配符（*）。
+
+=======================================================================
+避免重定向也是减少HTTP 请求的数量的方法。你也许认为这很少见，其实URL 结尾
+缺少斜线（/）是一个最常见的重定向场景，而这个斜线不应当被丢掉。例如，当前访问
+http://facebook.com 时，会被重定向到http://facebook.com/。如果使用了Apache，可以
+使用Alias 或mod_rewrite 来修正这个问题。
+
+==================================================================
+你会发现在上面的例子中我们没有指定请求的协议，而只使用//。这个鲜为人知的技巧
+使得获取脚本文件时，可以使用和宿主页面一样的协议。换言之，如果页面通过安全的
+HTTPS 加载，该脚本文件同样会使用HTTPS，从而避免所有的安全警告。
+
+==============================================================================
+从js向服务器端发送错误日志可以通过
+var img = new Image();
+img.src = '服务器端记录日志的action'
+来实现
+new Image所有浏览器都实现
+而且src允许跨域
+
+function log(url) {
+	new Image().url = url;
+}
+这样多次调用可能会导致统计的数据丢失
+因为闭包导致url请求未完整发送
+
+========================================================================
+函数的惰性加载是指可以根据实际情况定义函数
+常见于浏览器特性检测中
+这样不用每次执行都走一次if分支
+===========================================================================
+
+返回一个数组副本最简单的方法是调用无参数的concat方法：
+var a = [1, 2, 3, 4, 5];
+var b = a.concat();
+
+===========================================================
+当处理一个超大数组时，如果这个数组：
+1.不必同步执行
+2.没有执行顺序的要求
+则可以考虑把数组分块用setTimeout来处理
+
+=======================================================
+setTimeout可以用来限制连续变动发生时，只执行一次代码
+var t;
+t = setTimeout(function() {
+	clearTimeout(t);
+	t = setTimeout(func, time);
+}, time);
+
+======================================================
+ie10,ff,chrome支持indexedDB
+
+
+
+=======================================================
+arguments不是数组
+不能直接调用数组的方法
+但可以通过call和apply来调用
+Array.prototype.slice.call(arguments, 1);
+
+
+=========================================================
+不要试图利用prototype来继承Array等原生类
+因为浏览器兼容的问题
+不是所有表现都一样
+比如在ie中，继承了Array类的话
+子类的length属性会访问不到
+
+======================================================
+在解决忘记写new而调用构造函数的时候
+可以在这个构造函数里判断this的construtor是否是当前函数
+不是的话，new一个构造函数
+
+
+========================================================
+/abc/.test(function(){abc;});
+这个方法是用来判断浏览器是否支持将函数序列化
+即自动调用function的toString方法
+
+===================================================
+js中的继承，若要调用父类的方法
+则需要在子类中保存一个父类的prototype
+
+=====================================================
+timer是浏览器赋予js的一个特征
+如果将js用于非浏览器环境
+则需要自己实现timer特性
+
+======================================================
+var fn = function t() {
+	setTimeout(t, 10);
+
+};
+setTimeout(fn, 10);
+
+setInterval(fn, 10);
+这两种方式实行的间隔执行代码中
+第一种方式的间隔不会比10ms更早
+
+============================================
+setInterval的间隔如果设置为0
+在ie9及更早版本中
+只会执行一次
+
+
+=========================================
+页面存在太多的setInterval的话会严重影响性能
+
+
+
+================================================
+关于eval:
+1.传入的参数要求是字符串
+2.参数里的代码的作用域是eval被调用时候的作用域
+3.eval会返回参数中最后一句表达式的执行结果
+4.当参数是一个变量、原始类型或者赋值表达式的时候，eval中的参数不需要圆括号包起来，其余情况都需要圆括号包起来
+5.在ie9之前，如果要eval一个代表定义function的字符串，前面需要添加false||来实现：
+var a = eval('(false||function() {})');
+
+关于Function：
+参数里的代码的作用域总是挂在全局作用域上
+
+setTimeout和setInterval中如果传字符串来执行代码的话
+其中的作用域也是挂在全局作用域里的
+
+可以利用动态插入<script>标签的方法来给全局作用域添加属性
+插入的<script>标签可以马上移除
+
+----------------------------------------------------
+/**
+ * @desc 判断是否是在手Q的环境下
+ * @returns {boolean}
+ */
+export function isMqq() {
+    return /(ipad|iphone|ipod).*? (ipad)?qq\/([\d.]+)|\bv1_and_sqi?_([\d.]+)(.*? qq\/([\d.]+))?/.test(_getUA())
+}
+
+----------------------------------------------------
+
+
+Navigator.sendBeacon()
+
+-----------------------------------------------
+xhr.withCredentials
+
+
+
+-------------------------------------------------------
+WindowsWechat
+userAgent
+用这个来判断是不是在pc微信内嵌浏览器
+
+---------------------------------------------------
+设置inline-block元素的overflow：hidden意外增加元素总体高度。
+
+解决方法 
+常用的解决方法是为上述inline-block元素添加vertical-align: bottom。你可以在上面的例子中在线测试下。
+解决方法 
+可以将inline-block设为block，即可解决问题。
+
+--------------------------------------------
+box-sizing
+元素的border和padding是否计算入宽度内
+content-box:不计算入内，即元素的实际尺寸就是width和height指定的尺寸，再加上border和padding的尺寸
+border-box:计算入内，即元素的实际尺寸就是width和height指定的尺寸
+
+---------------------------------------
+/* to fix placeholder not vertical align middle in safari */
+@media only screen and (-webkit-min-device-pixel-ratio: 1) {
+     ::i-block-chrome, #search {
+        line-height: 1px!important;
+    }
+}
+
+
+---------------------------------------------------------------
+safari的隐私模式并没有禁止localStorage，只是调用setItem的时候会报异常
+
+-----------------------------------------------
+<div>
+<span>任意文字数量</span>
+</div>
+
+div {
+.h(100px);
+.lh(100px);
+.vm();
+}
+
+span {
+.dib();
+.vm();
+.lh(12px);
+}
+实现多行文字居中
+----------------------------
+多行文字省略号：
+.multi_ellipsis(@line:2) {
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: @line;
+	-moz-box-orient: vertical;
+	-moz-line-clamp: @line;
+	-ms-box-orient: vertical;
+	-ms-line-clamp: @line;
+	-o-box-orient: vertical;
+	-o-line-clamp: @line;
+	display: -webkit-box;
+	overflow:hidden;
+}
+注意如果是全英文和数字的
+还要添加width和word-break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
