@@ -102,8 +102,6 @@ $("td").click(function(){
 
 提交按钮不要使用id="submit" name="submit"
 
-改dwr后，downoad下来http://172.21.127.34:8080/mu/dwr/interface/FrontLoginAction.js，再添加到interface.js里
-
 当脚本设置了某个radio为checked，再在dom树中移动它的位置，或者其祖先元素的位置(即示例中的：$("#dialog").appendTo("body");)，当前radio在ie6下的checked状态被清除了！
 
 object.attrName = object[attrName],用中括号取的时候注意引号
